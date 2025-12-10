@@ -1,18 +1,19 @@
-#  My First Quant Trading Bot
+#  Simple Moving Average Backtester
 
-This is my first shot at building a "quant" project. I wanted to see if I could use Python to backtest a real trading strategy.
+This project is a Python-based backtesting engine that implements the classic Simple Moving Average (SMA) Crossover strategy. It serves as the foundational "Capstone" and is my first major project, demonstrating the core mechanics of algorithmic trading: data ingestion, signal generation, and performance benchmarking.
 
 It uses the classic **Simple Moving Average (SMA) Crossover**. The logic is pretty simple:
 * **Buy Signal :** When the short-term (50-day) average price crosses *above* the long-term (200-day) average.
 * **Sell Signal :** When the short-term average crosses *below* the long-term average.
 
-## Why I Built This
+## Features
+* Automated Data Pipeline: Fetches historical OHLCV data directly from Yahoo Finance APIs.
 
-I'm teaching myself how to use Python for finance and data. This project was the perfect way to learn how to:
-* Grab real stock data from the internet (with `yfinance`)
-* Clean up and organize time-series data (with `pandas`)
-* Calculate indicators and create buy/sell signals (with `numpy`)
-* Plot everything to see if it actually worked (with `matplotlib`)
+* Vectorized Signal Logic: Uses numpy and pandas to calculate moving averages and identify crossover points without slow iteration loops.
+
+* Performance Benchmarking: Automatically compares the strategy's cumulative returns against a passive "Buy & Hold" baseline.
+
+* Visual Diagnostics: Generates dual-axis charts plotting price, SMAs, and entry/exit markers.
 
 ## Tech Stack
 * Python
@@ -24,7 +25,7 @@ I'm teaching myself how to use Python for finance and data. This project was the
 ## How to Run It
 
 1.  Clone this repo.
-2.  Set up a virtual environment (it's good practice!):
+2.  Set up a virtual environment:
     ```bash
     python -m venv venv
     ```
@@ -40,7 +41,7 @@ I'm teaching myself how to use Python for finance and data. This project was the
     ```bash
     pip install -r requirements.txt
     ```
-4.  Just run the script!
+4.  Just run the script
     ```bash
     python sma_strategy.py
     ```
@@ -56,7 +57,7 @@ When I ran it on Apple stock (`AAPL`) from 2018, here's what I got:
 * **My Strategy's Return:** 330.92%
 * **"Buy & Hold" Return:** 598.11%
 
-It **did not** beat the market, but honestly, that's what I expected. This strategy is super simple and doesn't account for things like trading fees, slippage, or big market events. The main goal was just to build the backtester itself, and that part worked perfectly.
+Key Takeaway: While the strategy was profitable, it failed to beat the market. This validates the Efficient Market Hypothesis in this specific context and highlights the limitations of using lagging indicators (Moving Averages) in high-momentum stocks like Apple. It serves as a baseline for developing more complex strategies in future phases.
 
 Here are the charts my script generated:
 
